@@ -35,15 +35,46 @@ end
 
 def starts_with_consonant? s
   # YOUR CODE HERE
-  
+  if s.match?(/^[^aeiou]/i)
+    if s.match?(/^\p{L}/i)
+      return true
+    end
+  end
+
+  return false
 end
 
 def binary_multiple_of_4? s
   # YOUR CODE HERE
+  stringVer = s.to_s
+  if stringVer.match?(/\A[01]+\z/)
+    if stringVer[stringVer.length-1] == '0' && stringVer[stringVer.length-2] == '0'
+      return true
+    end
+  end
+  return false
 end
 
 # Part 3
 
 class BookInStock
-# YOUR CODE HERE
+  attr_accessor :isbn, :price
+  
+  def initialize(isbn, price)
+    if isbn.empty?
+      raise ArgumentError, "Invalid isbn."
+    end
+
+    if price <= 0
+      raise ArgumentError, "Invalid price."
+    end
+    
+    @isbn = isbn
+    @price = price
+  end
+  
+  def price_as_string
+    return "$#{'%.2f' % price}"
+  end
 end
+
